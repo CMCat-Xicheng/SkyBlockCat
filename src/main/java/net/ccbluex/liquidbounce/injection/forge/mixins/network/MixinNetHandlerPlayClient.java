@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EntityDamageEvent;
 import net.ccbluex.liquidbounce.event.EntityMovementEvent;
-import net.ccbluex.liquidbounce.features.module.modules.misc.AntiExploit;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Patcher;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui;
@@ -126,8 +125,6 @@ public abstract class MixinNetHandlerPlayClient {
         final String url = p_handleResourcePack_1_.getURL();
         final String hash = p_handleResourcePack_1_.getHash();
 
-        final AntiExploit antiExploit = LiquidBounce.moduleManager.getModule(AntiExploit.class);
-
         try {
             final String scheme = new URI(url).getScheme();
             final boolean isLevelProtocol = "level".equals(scheme);
@@ -147,14 +144,7 @@ public abstract class MixinNetHandlerPlayClient {
                     netManager.sendPacket(new C19PacketResourcePackStatus(hash, C19PacketResourcePackStatus.Action.FAILED_DOWNLOAD));
                 }
                 
-                if (antiExploit.getState() && antiExploit.getNotifyValue().get()) {
-                    ClientUtils.displayChatMessage("§8[§9§lLiquidBounce+§8] §6Resourcepack exploit detected.");
-                    ClientUtils.displayChatMessage("§8[§9§lLiquidBounce+§8] §7Exploit target directory: §r" + url);
-
-                    throw new IllegalStateException("Invalid levelstorage resourcepack path");
-                } else {
-                    callbackInfo.cancel(); // despite not having it enabled we still prevents anything from illegally checking files in your computer.
-                }
+                callbackInfo.cancel(); // despite not having it enabled we still prevents anything from illegally checking files in your computer.
                 
             }
         } catch (final URISyntaxException e) {
