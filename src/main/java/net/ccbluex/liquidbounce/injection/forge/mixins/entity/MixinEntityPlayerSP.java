@@ -9,17 +9,10 @@ import de.enzaxd.viaforge.ViaForge;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.AntiHunger;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.PortalMenu;
-import net.ccbluex.liquidbounce.features.module.modules.misc.AntiDesync;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InvMove;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
-import net.ccbluex.liquidbounce.features.module.modules.movement.LongJump;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Sneak;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;
 import net.ccbluex.liquidbounce.features.module.modules.render.Animations;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 //import net.ccbluex.liquidbounce.features.module.modules.world.Tower;
 import net.ccbluex.liquidbounce.utils.MovementUtils;
 import net.ccbluex.liquidbounce.utils.Rotation;
@@ -152,13 +145,11 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
             LiquidBounce.eventManager.callEvent(event);
 
             final InvMove inventoryMove = LiquidBounce.moduleManager.getModule(InvMove.class);
-            final Sneak sneak = LiquidBounce.moduleManager.getModule(Sneak.class);
-            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.isAACAP()) || LiquidBounce.moduleManager.getModule(AntiHunger.class).getState() || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
+            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.isAACAP()) ;
 
             ActionEvent actionEvent = new ActionEvent(this.isSprinting() && !fakeSprint, this.isSneaking());
 
             boolean sprinting = actionEvent.getSprinting();
-            boolean sneaking = actionEvent.getSneaking();
 
             if (sprinting != this.serverSprintState) {
                 if (sprinting)
@@ -169,14 +160,6 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                 this.serverSprintState = sprinting;
             }
 
-            if (sneaking != this.serverSneakState && (!sneak.getState() || sneak.modeValue.get().equalsIgnoreCase("Legit"))) {
-                if (sneaking)
-                    this.sendQueue.addToSendQueue(new C0BPacketEntityAction((EntityPlayerSP) (Object) this, C0BPacketEntityAction.Action.START_SNEAKING));
-                else
-                    this.sendQueue.addToSendQueue(new C0BPacketEntityAction((EntityPlayerSP) (Object) this, C0BPacketEntityAction.Action.STOP_SNEAKING));
-
-                this.serverSneakState = sneaking;
-            }
 
             if (this.isCurrentViewEntity()) {
                 float yaw = event.getYaw();
