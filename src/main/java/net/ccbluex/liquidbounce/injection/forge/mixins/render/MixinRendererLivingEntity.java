@@ -10,9 +10,6 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.color.ColorMixer;
 import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
-import net.ccbluex.liquidbounce.features.module.modules.render.ESP2D;
-import net.ccbluex.liquidbounce.features.module.modules.render.NameTags;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoRender;
 import net.ccbluex.liquidbounce.features.module.modules.render.TrueSight;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.EntityUtils;
@@ -45,12 +42,6 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
     @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("HEAD"), cancellable = true)
     private <T extends EntityLivingBase> void injectChamsPre(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
         final Chams chams = LiquidBounce.moduleManager.getModule(Chams.class);
-        final NoRender noRender = LiquidBounce.moduleManager.getModule(NoRender.class);
-
-        if (noRender.getState() && noRender.shouldStopRender(entity)) {
-            callbackInfo.cancel();
-            return;
-        }
 
         if (chams.getState() && chams.getTargetsValue().get() && chams.getLegacyMode().get() && ((chams.getLocalPlayerValue().get() && entity == Minecraft.getMinecraft().thePlayer) || EntityUtils.isSelected(entity, false))) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -61,7 +52,6 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
     @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("RETURN"))
     private <T extends EntityLivingBase> void injectChamsPost(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
         final Chams chams = LiquidBounce.moduleManager.getModule(Chams.class);
-        final NoRender noRender = LiquidBounce.moduleManager.getModule(NoRender.class);
         
         if (chams.getState() && chams.getTargetsValue().get() && chams.getLegacyMode().get() && ((chams.getLocalPlayerValue().get() && entity == Minecraft.getMinecraft().thePlayer) || EntityUtils.isSelected(entity, false))
             && !(noRender.getState() && noRender.shouldStopRender(entity))) {
@@ -70,16 +60,6 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
         }
     }
 
-    @Inject(method = "canRenderName(Lnet/minecraft/entity/EntityLivingBase;)Z", at = @At("HEAD"), cancellable = true)
-    private <T extends EntityLivingBase> void canRenderName(T entity, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        final NoRender noRender = LiquidBounce.moduleManager.getModule(NoRender.class);
-
-        if (!ESP.renderNameTags 
-            || (LiquidBounce.moduleManager.getModule(NameTags.class).getState() && ((LiquidBounce.moduleManager.getModule(NameTags.class).getLocalValue().get() && entity == Minecraft.getMinecraft().thePlayer && (!LiquidBounce.moduleManager.getModule(NameTags.class).getNfpValue().get() || Minecraft.getMinecraft().gameSettings.thirdPersonView != 0)) || EntityUtils.isSelected(entity, false))) 
-            || ESP2D.shouldCancelNameTag(entity)
-            || (noRender.getState() && noRender.getNameTagsValue().get()))
-            callbackInfoReturnable.setReturnValue(false);
-    }
 
     /**
      * @author CCBlueX
