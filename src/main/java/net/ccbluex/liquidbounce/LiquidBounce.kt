@@ -1,11 +1,6 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
+
 package net.ccbluex.liquidbounce
 
-import net.ccbluex.liquidbounce.discord.ClientRichPresence
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.command.CommandManager
@@ -36,10 +31,10 @@ import kotlin.concurrent.thread
 object LiquidBounce {
 
     // Client information
-    const val CLIENT_NAME = "LiquidBounce++"
-    const val CLIENT_VERSION = "110822"
-    const val CLIENT_CREATOR = "CCBlueX, exit-scammed & TheMosKau"
-    const val CLIENT_CLOUD = "https://amoclub.github.io/PlusPlusCloud/LiquidBounce"
+    const val CLIENT_NAME = "SkyBlockCat"
+    const val CLIENT_VERSION = "1220917"
+    const val CLIENT_CREATOR = "CMCat"
+    const val CLIENT_CLOUD = "https://ccat.tech/sbc"
 
     var isStarting = false
     var mainMenuPrep = false
@@ -97,9 +92,6 @@ object LiquidBounce {
         eventManager.registerListener(SessionUtils())
         eventManager.registerListener(MacroManager)
 
-        // Init Discord RPC
-        clientRichPresence = ClientRichPresence()
-
         // Create command manager
         commandManager = CommandManager()
 
@@ -150,16 +142,6 @@ object LiquidBounce {
         // Load generators
         GuiAltManager.loadActiveGenerators()
 
-        // Setup Discord RPC
-        if (clientRichPresence.showRichPresenceValue) {
-            thread {
-                try {
-                    clientRichPresence.setup()
-                } catch (throwable: Throwable) {
-                    ClientUtils.getLogger().error("Failed to setup Discord RPC.", throwable)
-                }
-            }
-        }
 
         ClientUtils.getLogger().info("Finished loading $CLIENT_NAME in ${System.currentTimeMillis() - lastTick}ms.")
 
@@ -177,8 +159,6 @@ object LiquidBounce {
         // Save all available configs
         fileManager.saveAllConfigs()
 
-        // Shutdown discord rpc
-        clientRichPresence.shutdown()
     }
 
 }
