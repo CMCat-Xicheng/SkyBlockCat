@@ -1,8 +1,4 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
+
 package net.ccbluex.liquidbounce.features.module
 
 import net.ccbluex.liquidbounce.LiquidBounce
@@ -121,7 +117,7 @@ open class Module : MinecraftInstance(), Listenable {
     /**
      * Print [msg] to chat
      */
-    protected fun chat(msg: String) = ClientUtils.displayChatMessage("§8[§9§l${LiquidBounce.CLIENT_NAME}§8] §3$msg")
+    protected fun chat(msg: String) = ClientUtils.displayChatMessage("§7[§b SkyBlockCat §7] §3$msg")
 
     /**
      * Called when module toggled
