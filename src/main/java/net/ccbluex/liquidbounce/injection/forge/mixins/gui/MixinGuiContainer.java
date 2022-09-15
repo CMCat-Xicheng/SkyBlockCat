@@ -9,7 +9,6 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura;
 import net.ccbluex.liquidbounce.features.module.modules.render.Animations;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.features.module.modules.player.InvManager;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
 import net.ccbluex.liquidbounce.utils.render.EaseUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
@@ -58,41 +57,6 @@ public abstract class MixinGuiContainer extends MixinGuiScreen {
         final HUD hud = LiquidBounce.moduleManager.getModule(HUD.class);
 
         int firstY = 0;
-
-        if (guiScreen instanceof GuiChest) {
-            switch (hud.getContainerButton().get()) {
-                case "TopLeft":
-                    if (LiquidBounce.moduleManager.getModule(KillAura.class).getState()) {
-                        buttonList.add(killAuraButton = new GuiButton(1024576, 5, 5, 140, 20, "Disable KillAura"));
-                        firstY += 20;
-                    }
-                    if (LiquidBounce.moduleManager.getModule(InvManager.class).getState()) {
-                        buttonList.add(invManagerButton = new GuiButton(321123, 5, 5 + firstY, 140, 20, "Disable InvManager"));
-                        firstY += 20;
-                    }
-                    if (LiquidBounce.moduleManager.getModule(ChestStealer.class).getState()) {
-                        buttonList.add(chestStealerButton = new GuiButton(727, 5, 5 + firstY, 140, 20, "Disable Stealer"));
-                        firstY += 20;
-                    }
-                    buttonList.add(stealButton = new GuiButton(1234123, 5, 5 + firstY, 140, 20, "Steal this chest"));
-                    break;
-                case "TopRight":
-                    if (LiquidBounce.moduleManager.getModule(KillAura.class).getState()) {
-                        buttonList.add(killAuraButton = new GuiButton(1024576, width - 145, 5, 140, 20, "Disable KillAura"));
-                        firstY += 20;
-                    }
-                    if (LiquidBounce.moduleManager.getModule(InvManager.class).getState()) {
-                        buttonList.add(invManagerButton = new GuiButton(321123, width - 145, 5 + firstY, 140, 20, "Disable InvManager"));
-                        firstY += 20;
-                    }
-                    if (LiquidBounce.moduleManager.getModule(ChestStealer.class).getState()) {
-                        buttonList.add(chestStealerButton = new GuiButton(727, width - 145, 5 + firstY, 140, 20, "Disable Stealer"));
-                        firstY += 20;
-                    }
-                    buttonList.add(stealButton = new GuiButton(1234123, width - 145, 5 + firstY, 140, 20, "Steal this chest"));
-                    break;
-            }
-        }
         
         lastMS = System.currentTimeMillis();
         progress = 0F;
@@ -101,18 +65,6 @@ public abstract class MixinGuiContainer extends MixinGuiScreen {
     @Override
     protected void injectedActionPerformed(GuiButton button) {
         ChestStealer chestStealer = LiquidBounce.moduleManager.getModule(ChestStealer.class);
-
-        if (button.id == 1024576)
-            LiquidBounce.moduleManager.getModule(KillAura.class).setState(false);
-        if (button.id == 321123)
-            LiquidBounce.moduleManager.getModule(InvManager.class).setState(false);
-        if (button.id == 727)
-            chestStealer.setState(false);
-        if (button.id == 1234123 && !chestStealer.getState()) {
-            chestStealer.setContentReceived(mc.thePlayer.openContainer.windowId);
-            chestStealer.setOnce(true);
-            chestStealer.setState(true);
-        }
     }
 
     @Inject(method = "drawScreen", at = @At("HEAD"), cancellable = true)
@@ -169,11 +121,6 @@ public abstract class MixinGuiContainer extends MixinGuiScreen {
         
         try {
             GuiScreen guiScreen = mc.currentScreen;
-
-            if (stealButton != null) stealButton.enabled = !chestStealer.getState();
-            if (killAuraButton != null) killAuraButton.enabled = LiquidBounce.moduleManager.getModule(KillAura.class).getState();
-            if (chestStealerButton != null) chestStealerButton.enabled = chestStealer.getState();
-            if (invManagerButton != null) invManagerButton.enabled = LiquidBounce.moduleManager.getModule(InvManager.class).getState();
 
             if(chestStealer.getState() && chestStealer.getSilenceValue().get() && guiScreen instanceof GuiChest) {
                 mc.setIngameFocus();
