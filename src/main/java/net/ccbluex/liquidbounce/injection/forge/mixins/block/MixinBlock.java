@@ -7,9 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.BlockBBEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.GhostHand;
-import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.ccbluex.liquidbounce.features.module.modules.world.NoSlowBreak;
 import net.minecraft.block.Block;
@@ -105,16 +103,7 @@ public abstract class MixinBlock {
             if (noSlowBreak.getAirValue().get() && !playerIn.onGround) {
                 f *= 5.0F;
             }
-        } else if (playerIn.onGround) { // NoGround
-            final NoFall noFall = LiquidBounce.moduleManager.getModule(NoFall.class);
-            final Criticals criticals = LiquidBounce.moduleManager.getModule(Criticals.class);
-
-            if (noFall.getState() && noFall.getTypeValue().get().equalsIgnoreCase("edit") && noFall.getEditMode().get().equalsIgnoreCase("noground") ||
-                    criticals.getState() && criticals.getModeValue().get().equalsIgnoreCase("NoGround")) {
-                f /= 5F;
-            }
         }
-
         callbackInfo.setReturnValue(f);
     }
 }
