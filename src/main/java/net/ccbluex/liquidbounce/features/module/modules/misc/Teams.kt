@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.value.IntegerValue
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.ItemArmor
 
-@ModuleInfo(name = "Teams", description = "Prevents Killaura from attacking team mates.", category = ModuleCategory.MISC)
+@ModuleInfo(name = "Teams", description = "Prevents Killaura from attacking team mates.", category = ModuleCategory.COMBAT)
 class Teams : Module() {
 
     private val scoreboardValue = BoolValue("ScoreboardTeam", true)
