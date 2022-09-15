@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.value.*;
 
 import java.util.HashMap;
 
-@ModuleInfo(name = "Patcher", description = "improving your experience without bloatware, aka. Essential.", category = ModuleCategory.MISC, canEnable = false)
+@ModuleInfo(name = "Patcher", description = "improving your experience without bloatware, aka. Essential.", category = ModuleCategory.PLAYER, canEnable = false)
 public class Patcher extends Module {
 
     public static final BoolValue noHitDelay = new BoolValue("NoHitDelay", false);
