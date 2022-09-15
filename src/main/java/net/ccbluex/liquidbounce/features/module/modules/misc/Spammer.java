@@ -20,7 +20,7 @@ import net.ccbluex.liquidbounce.value.TextValue;
 
 import java.util.Random;
 
-@ModuleInfo(name = "Spammer", description = "Spams the chat with a given message.", category = ModuleCategory.MISC)
+@ModuleInfo(name = "Spammer", description = "Spams the chat with a given message.", category = ModuleCategory.PLAYER)
 public class Spammer extends Module {
 
     private final IntegerValue maxDelayValue = new IntegerValue("MaxDelay", 1000, 0, 5000, "ms") {
