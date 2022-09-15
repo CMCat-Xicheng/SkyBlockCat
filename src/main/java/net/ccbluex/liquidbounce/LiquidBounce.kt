@@ -58,8 +58,6 @@ object LiquidBounce {
     // Menu Background
     var background: ResourceLocation? = null
 
-    // Discord RPC
-    lateinit var clientRichPresence: ClientRichPresence
 
     var lastTick : Long = 0L
 
