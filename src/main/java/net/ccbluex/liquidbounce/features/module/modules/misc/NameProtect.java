@@ -26,7 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 
-@ModuleInfo(name = "NameProtect", spacedName = "Name Protect", description = "Changes player names client-side.", category = ModuleCategory.MISC)
+@ModuleInfo(name = "NameProtect", spacedName = "Name Protect", description = "Changes player names client-side.", category = ModuleCategory.RENDER)
 public class NameProtect extends Module {
 
     private final TextValue fakeNameValue = new TextValue("FakeName", "&cMe");
