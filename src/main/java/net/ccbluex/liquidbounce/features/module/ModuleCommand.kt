@@ -1,8 +1,4 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
+
 package net.ccbluex.liquidbounce.features.module
 
 import net.ccbluex.liquidbounce.features.command.Command
@@ -50,7 +46,7 @@ class ModuleCommand(val module: Module, val values: List<Value<*>> = module.valu
             val newValue = !value.get()
             value.set(newValue)
 
-            chat("§7${module.name} §8${args[1]}§7 was toggled ${if (newValue) "§8on§7" else "§8off§7" + "."}")
+            chat("§f${module.name} §7${args[1]}§f was toggled ${if (newValue) "§7on§g" else "§7off§f" + "."}")
             playEdit()
         } else {
             if (args.size < 3) {
@@ -72,13 +68,13 @@ class ModuleCommand(val module: Module, val values: List<Value<*>> = module.valu
                             id = Block.getIdFromBlock(Block.getBlockFromName(args[2]))
 
                             if (id <= 0) {
-                                chat("§7Block §8${args[2]}§7 does not exist!")
+                                chat("§fBlock §7${args[2]}§f does not exist.")
                                 return
                             }
                         }
 
                         value.set(id)
-                        chat("§7${module.name} §8${args[1].toLowerCase()}§7 was set to §8${BlockUtils.getBlockName(id)}§7.")
+                        chat("§f${module.name} §7${args[1].toLowerCase()}§f was set to §7${BlockUtils.getBlockName(id)}§f.")
                         playEdit()
                         return
                     }
@@ -95,10 +91,10 @@ class ModuleCommand(val module: Module, val values: List<Value<*>> = module.valu
                     is TextValue -> value.set(StringUtils.toCompleteString(args, 2))
                 }
 
-                chat("§7${module.name} §8${args[1]}§7 was set to §8${value.get()}§7.")
+                chat("§f${module.name} §7${args[1]}§f was set to §7${value.get()}§f.")
                 playEdit()
             } catch (e: NumberFormatException) {
-                chat("§8${args[2]}§7 cannot be converted to number!")
+                chat("§7${args[2]}§f cannot be converted to number.")
             }
         }
     }
