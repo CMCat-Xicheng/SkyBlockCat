@@ -1,4 +1,3 @@
-
 package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
@@ -147,6 +146,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         RenderUtils.drawRoundedRect(2F + sliderX, height - 26F, 12F + sliderX, height - 16F, 5F, Color.white.rgb)
     }
 
+    fun renderDarkModeButton() {;}
 
     fun renderBar(mouseX: Int, mouseY: Int, partialTicks: Float) {
         val staticX = width / 2F - 120F
