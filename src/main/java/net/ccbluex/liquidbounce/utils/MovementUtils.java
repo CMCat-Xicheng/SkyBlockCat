@@ -105,7 +105,7 @@ public final class MovementUtils extends MinecraftInstance {
     }
 
     public static double getDirection() {
-        returnDirectionRotation(mc.thePlayer.rotationYaw, mc.thePlayer.moveStrafing, mc.thePlayer.moveForward);
+        return getDirectionRotation(mc.thePlayer.rotationYaw, mc.thePlayer.moveStrafing, mc.thePlayer.moveForward);
     }
 
     public static float getRawDirection() {
