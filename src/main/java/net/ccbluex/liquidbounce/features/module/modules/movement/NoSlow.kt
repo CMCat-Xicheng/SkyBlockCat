@@ -39,7 +39,7 @@ import net.minecraft.util.EnumFacing
 class NoSlow : Module() {
    @EventTarget
     fun onUpdate(event: UpdateEvent) {
-      if (event.eventState == EventState.POST && (mc.thePlayer.isBlocking)) {
+      if ((mc.thePlayer.isBlocking)) {
                 mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0f, 0f, 0f))
       }
     }
