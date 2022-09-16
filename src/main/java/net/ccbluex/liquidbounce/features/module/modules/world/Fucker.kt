@@ -37,14 +37,14 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.Vec3
 import java.awt.Color
 
-@ModuleInfo(name = "Fucker", description = "Destroys selected blocks around you. (aka. IDNuker)", category = ModuleCategory.WORLD)
+@ModuleInfo(name = "IDNucker", description = "Destroys selected blocks around you.", category = ModuleCategory.WORLD)
 object Fucker : Module() {
 
     /**
      * SETTINGS
      */
 
-    private val blockValue = BlockValue("Block", 26)
+    private val blockValue = BlockValue("Block", 1)
     private val ignoreFirstBlockValue = BoolValue("IgnoreFirstDetection", false)
     private val resetOnWorldValue = BoolValue("ResetOnWorldChange", false, { ignoreFirstBlockValue.get() })
     private val renderValue = ListValue("Render-Mode", arrayOf("Box", "Outline", "2D", "None"), "Box")
