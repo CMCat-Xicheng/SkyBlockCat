@@ -304,8 +304,6 @@ public abstract class MixinMinecraft {
                     this.effectRenderer.addBlockHitEffects(blockPos, this.objectMouseOver.sideHit);
                     this.thePlayer.swingItem();
                 }
-            } else if (!LiquidBounce.moduleManager.getModule(AbortBreaking.class).getState()) {
-                this.playerController.resetBlockRemoving();
             }
         }
     }
