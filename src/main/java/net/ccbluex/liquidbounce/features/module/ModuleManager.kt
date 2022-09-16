@@ -94,7 +94,6 @@ class ModuleManager : Listenable {
                 TargetMark::class.java,
                 SafeWalk::class.java,
                 GhostHand::class.java,
-                AntiHunger::class.java,
                 Freeze::class.java,
                 AntiCactus::class.java,
                 Eagle::class.java,
