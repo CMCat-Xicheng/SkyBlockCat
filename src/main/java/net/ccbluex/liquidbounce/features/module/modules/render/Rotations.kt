@@ -10,9 +10,7 @@ import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.features.module.modules.combat.BowAimbot
 import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura
-import net.ccbluex.liquidbounce.features.module.modules.exploit.Disabler
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint
 import net.ccbluex.liquidbounce.features.module.modules.world.*
@@ -55,13 +53,10 @@ class Rotations : Module() {
 
     fun shouldRotate(): Boolean {
         val killAura = LiquidBounce.moduleManager.getModule(KillAura::class.java) as KillAura
-        val disabler = LiquidBounce.moduleManager.getModule(Disabler::class.java) as Disabler
         val sprint = LiquidBounce.moduleManager.getModule(Sprint::class.java) as Sprint
-        return getState(Scaffold::class.java) || 
-                (getState(Sprint::class.java) && sprint.allDirectionsValue.get() && sprint.moveDirPatchValue.get()) ||
+        return (getState(Sprint::class.java) && sprint.allDirectionsValue.get() && sprint.moveDirPatchValue.get()) ||
                 (getState(KillAura::class.java) && killAura.target != null) ||
-                (getState(Disabler::class.java) && disabler.canRenderInto3D) ||
-                getState(BowAimbot::class.java) || getState(Fucker::class.java) ||
+                getState(Fucker::class.java) ||  getState(ChestAura2::class.java) ||
                 getState(ChestAura::class.java) || getState(Fly::class.java)
     }
 }
