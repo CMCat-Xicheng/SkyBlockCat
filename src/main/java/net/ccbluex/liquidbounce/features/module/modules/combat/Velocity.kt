@@ -14,7 +14,6 @@ import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.utils.MovementUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
@@ -205,8 +204,7 @@ class Velocity : Module() {
                         mc.thePlayer.onGround = true
 
                     // Reduce Y
-                    if (mc.thePlayer.hurtResistantTime > 0 && aacPushYReducerValue.get()
-                            && !LiquidBounce.moduleManager[Speed::class.java]!!.state)
+                    if (mc.thePlayer.hurtResistantTime > 0 && aacPushYReducerValue.get())
                         mc.thePlayer.motionY -= 0.014999993
                 }
 
