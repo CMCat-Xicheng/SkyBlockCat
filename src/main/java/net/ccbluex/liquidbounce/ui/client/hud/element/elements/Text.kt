@@ -9,7 +9,6 @@ import de.enzaxd.viaforge.ViaForge
 import de.enzaxd.viaforge.protocol.ProtocolCollection
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.module.modules.color.ColorMixer
-import net.ccbluex.liquidbounce.features.module.modules.misc.BanChecker
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
@@ -162,8 +161,8 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
             "mcps" -> return CPSCounter.getCPS(CPSCounter.MouseButton.MIDDLE).toString()
             "rcps" -> return CPSCounter.getCPS(CPSCounter.MouseButton.RIGHT).toString()
             "portalVersion" -> ProtocolCollection.getProtocolById(ViaForge.getInstance().version).getName()
-            "watchdogLastMin" -> BanChecker.WATCHDOG_BAN_LAST_MIN.toString()
-            "staffLastMin" -> BanChecker.STAFF_BAN_LAST_MIN.toString()
+            "watchdogLastMin" -> "233"
+            "staffLastMin" -> "233"
             "wdStatus" -> return if (PacketUtils.isWatchdogActive()) "Active" else "Inactive"
             "sessionTime" -> return SessionUtils.getFormatSessionTime()
             "worldTime" -> return SessionUtils.getFormatWorldTime()
