@@ -10,7 +10,6 @@ import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.features.module.modules.player.InvManager
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
@@ -147,9 +146,6 @@ class ChestStealer : Module() {
         if (!once && chestTitleValue.get() && (screen.lowerChestInventory == null || !screen.lowerChestInventory.name.contains(ItemStack(Item.itemRegistry.getObject(ResourceLocation("minecraft:chest"))).displayName)))
             return
 
-        // inventory cleaner
-        val inventoryCleaner = LiquidBounce.moduleManager[InvManager::class.java] as InvManager
-
         // Is empty?
         if (!isEmpty(screen) && !(closeOnFullValue.get() && fullInventory)) {
             autoCloseTimer.reset()
@@ -163,7 +159,7 @@ class ChestStealer : Module() {
                     for (slotIndex in 0 until screen.inventoryRows * 9) {
                         val slot = screen.inventorySlots.inventorySlots[slotIndex]
 
-                        if (slot.stack != null && (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item)) && (!inventoryCleaner.state || inventoryCleaner.isUseful(slot.stack, -1)))
+                        if (slot.stack != null && (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item)))
                             items.add(slot)
                     }
 
@@ -182,7 +178,7 @@ class ChestStealer : Module() {
                 val slot = screen.inventorySlots.inventorySlots[slotIndex]
 
                 if (delayTimer.hasTimePassed(nextDelay) && slot.stack != null &&
-                        (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item)) && (!inventoryCleaner.state || inventoryCleaner.isUseful(slot.stack, -1))) {
+                        (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item))) {
                     move(screen, slot)
                 }
             }
@@ -215,12 +211,11 @@ class ChestStealer : Module() {
     }
 
     private fun isEmpty(chest: GuiChest): Boolean {
-        val inventoryCleaner = LiquidBounce.moduleManager[InvManager::class.java] as InvManager
 
         for (i in 0 until chest.inventoryRows * 9) {
             val slot = chest.inventorySlots.inventorySlots[i]
 
-            if (slot.stack != null && (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item)) && (!inventoryCleaner.state || inventoryCleaner.isUseful(slot.stack, -1)))
+            if (slot.stack != null && (!onlyItemsValue.get() || slot.stack.item !is ItemBlock) && (!noDuplicateValue.get() || slot.stack.maxStackSize > 1 || !mc.thePlayer.inventory.mainInventory.filter { it != null && it.item != null }.map { it.item!! }.contains(slot.stack.item)) )
                 return false
         }
 
