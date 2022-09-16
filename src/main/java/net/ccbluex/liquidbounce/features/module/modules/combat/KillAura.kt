@@ -11,13 +11,10 @@ import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.features.module.modules.exploit.Disabler
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
 import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
-import net.ccbluex.liquidbounce.features.module.modules.movement.TargetStrafe
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.EntityUtils
 import net.ccbluex.liquidbounce.utils.MovementUtils
@@ -176,7 +173,6 @@ class KillAura : Module() {
     private val aacValue = BoolValue("AAC", false)
 
     private val silentRotationValue = BoolValue("SilentRotation", true, { !rotations.get().equals("none", true) })
-    val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "Strict", "Silent"), "Off")
     
     private val fovValue = FloatValue("FOV", 180f, 0f, 180f)
 
@@ -324,60 +320,6 @@ class KillAura : Module() {
             update()
     }
 
-
-    /**
-     * Strafe event
-     */
-    @EventTarget
-    fun onStrafe(event: StrafeEvent) {
-        val targetStrafe = LiquidBounce.moduleManager.getModule(TargetStrafe::class.java)!! as TargetStrafe
-        if (rotationStrafeValue.get().equals("Off", true) && !targetStrafe.state)
-            return
-
-        update()
-
-        if (currentTarget != null && RotationUtils.targetRotation != null) {
-            if (targetStrafe.canStrafe) {
-                val strafingData = targetStrafe.getData()
-                MovementUtils.strafeCustom(MovementUtils.getSpeed(), strafingData[0], strafingData[1], strafingData[2])
-                event.cancelEvent()
-            }
-            else when (rotationStrafeValue.get().toLowerCase()) {
-                "strict" -> {
-                    val (yaw) = RotationUtils.targetRotation ?: return
-                    var strafe = event.strafe
-                    var forward = event.forward
-                    val friction = event.friction
-
-                    var f = strafe * strafe + forward * forward
-
-                    if (f >= 1.0E-4F) {
-                        f = MathHelper.sqrt_float(f)
-
-                        if (f < 1.0F)
-                            f = 1.0F
-
-                        f = friction / f
-                        strafe *= f
-                        forward *= f
-
-                        val yawSin = MathHelper.sin((yaw * Math.PI / 180F).toFloat())
-                        val yawCos = MathHelper.cos((yaw * Math.PI / 180F).toFloat())
-
-                        mc.thePlayer.motionX += strafe * yawCos - forward * yawSin
-                        mc.thePlayer.motionZ += forward * yawCos + strafe * yawSin
-                    }
-                    event.cancelEvent()
-                }
-                "silent" -> {
-                    update()
-
-                    RotationUtils.targetRotation.applyStrafeToPlayer(event)
-                    event.cancelEvent()
-                }
-            }
-        }
-    }
 
     fun update() {
         if (cancelRun || (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
@@ -702,7 +644,7 @@ class KillAura : Module() {
                 if (entity.isSpectator || AntiBot.isBot(entity))
                     return false
 
-                if (EntityUtils.isFriend(entity) && !LiquidBounce.moduleManager[NoFriends::class.java]!!.state)
+                if (EntityUtils.isFriend(entity))
                     return false
 
                 val teams = LiquidBounce.moduleManager[Teams::class.java] as Teams
@@ -767,8 +709,6 @@ class KillAura : Module() {
         }
 
         // Extra critical effects
-        val criticals = LiquidBounce.moduleManager[Criticals::class.java] as Criticals
-
         for (i in 0..2) {
             // Critical Effect
             if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder && !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && mc.thePlayer.ridingEntity == null || criticals.state && criticals.msTimer.hasTimePassed(criticals.delayValue.get().toLong()) && !mc.thePlayer.isInWater && !mc.thePlayer.isInLava && !mc.thePlayer.isInWeb)
@@ -790,7 +730,6 @@ class KillAura : Module() {
     private fun updateRotations(entity: Entity): Boolean {
         if (rotations.get().equals("none", true)) return true
 
-        val disabler = LiquidBounce.moduleManager.getModule(Disabler::class.java)!! as Disabler
         val modify = disabler.canModifyRotation
 
         if (modify) return true // just ignore then
@@ -920,8 +859,6 @@ class KillAura : Module() {
             return
         }
 
-        val disabler = LiquidBounce.moduleManager.getModule(Disabler::class.java)!! as Disabler
-
         // Modify hit check for some situations
         if (rotations.get().equals("spin", true)) {
             hitable = target!!.hurtTime <= spinHurtTimeValue.get()
@@ -943,7 +880,7 @@ class KillAura : Module() {
             }
 
             if (raycastValue.get() && raycastedEntity is EntityLivingBase
-                    && (LiquidBounce.moduleManager[NoFriends::class.java]!!.state || !EntityUtils.isFriend(raycastedEntity)))
+                    && (!EntityUtils.isFriend(raycastedEntity)))
                 currentTarget = raycastedEntity
 
             hitable = if(maxTurnSpeed.get() > 0F) currentTarget == raycastedEntity else true
