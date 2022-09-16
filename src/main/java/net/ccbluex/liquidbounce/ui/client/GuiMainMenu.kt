@@ -147,15 +147,6 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         RenderUtils.drawRoundedRect(2F + sliderX, height - 26F, 12F + sliderX, height - 16F, 5F, Color.white.rgb)
     }
 
-    fun renderDarkModeButton() {
-        sliderDarkX = (sliderDarkX + (if (LiquidBounce.darkMode) 2F else -2F)).coerceIn(0F, 12F)
-        GlStateManager.disableAlpha()
-        RenderUtils.drawImage3(darkIcon, 28F, height - 40F, 14, 14, 1F, 1F, 1F, sliderDarkX / 12F)
-        RenderUtils.drawImage3(lightIcon, 28F, height - 40F, 14, 14, 1F, 1F, 1F, 1F - (sliderDarkX / 12F))
-        GlStateManager.enableAlpha()
-        RenderUtils.drawRoundedRect(4F, height - 36F, 22F, height - 30F, 3F, (if (LiquidBounce.darkMode) Color(70, 70, 70, 255) else Color(140, 140, 140, 255)).rgb)
-        RenderUtils.drawRoundedRect(2F + sliderDarkX, height - 38F, 12F + sliderDarkX, height - 28F, 5F, Color.white.rgb)
-    }
 
     fun renderBar(mouseX: Int, mouseY: Int, partialTicks: Float) {
         val staticX = width / 2F - 120F
