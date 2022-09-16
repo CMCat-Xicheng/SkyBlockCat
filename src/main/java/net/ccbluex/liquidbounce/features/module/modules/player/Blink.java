@@ -110,7 +110,7 @@ public class Blink extends Module {
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
-        final Color color = ColorUtils.rainbow()
+        final Color color = ColorUtils.rainbow();
 
         synchronized(positions) {
             glPushMatrix();
