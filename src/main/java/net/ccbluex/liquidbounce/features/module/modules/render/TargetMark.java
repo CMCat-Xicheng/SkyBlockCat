@@ -160,7 +160,6 @@ public class TargetMark extends Module {
 
                 if (dist > 255) dist = 255;
 
-                tracers.drawTraces(aura.getTarget(), getColor(aura.getTarget()), false);
             	
         		GL11.glEnd();
 
