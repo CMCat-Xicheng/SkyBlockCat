@@ -178,7 +178,7 @@ public abstract class MixinEntityRenderer {
         final TargetMark targetMark = LiquidBounce.moduleManager.getModule(TargetMark.class);
         final KillAura aura = LiquidBounce.moduleManager.getModule(KillAura.class);
 
-        if ((targetMark != null && aura != null && targetMark.modeValue.get().equalsIgnoreCase("tracers") && !aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null) || LiquidBounce.moduleManager.getModule(Tracers.class).getState()) GL11.glPushMatrix();
+        if ((targetMark != null && aura != null && targetMark.modeValue.get().equalsIgnoreCase("tracers") && !aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null)) GL11.glPushMatrix();
     }
 
     @Inject(method = "setupCameraTransform", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/EntityRenderer;setupViewBobbing(F)V", shift = At.Shift.AFTER))
@@ -186,7 +186,7 @@ public abstract class MixinEntityRenderer {
         final TargetMark targetMark = LiquidBounce.moduleManager.getModule(TargetMark.class);
         final KillAura aura = LiquidBounce.moduleManager.getModule(KillAura.class);
 
-        if ((targetMark != null && aura != null && targetMark.modeValue.get().equalsIgnoreCase("tracers") && !aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null) || LiquidBounce.moduleManager.getModule(Tracers.class).getState()) GL11.glPopMatrix();
+        if ((targetMark != null && aura != null && targetMark.modeValue.get().equalsIgnoreCase("tracers") && !aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null)) GL11.glPopMatrix();
     }
 
     /**
