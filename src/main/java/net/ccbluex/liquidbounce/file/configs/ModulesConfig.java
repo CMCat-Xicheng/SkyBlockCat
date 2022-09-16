@@ -75,9 +75,6 @@ public class ModulesConfig extends FileConfig {
             jsonMod.addProperty("KeyBind", module.getKeyBind());
             jsonMod.addProperty("Array", module.getArray());
             final JsonArray jsonAD = new JsonArray();
-            for (DisableEvent e : module.getAutoDisables()) {
-                jsonAD.add(new JsonPrimitive(e.toString()));
-            }
             jsonObject.add(module.getName(), jsonMod);
         }
 
