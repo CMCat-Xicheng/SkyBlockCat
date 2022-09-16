@@ -145,8 +145,6 @@ public class TargetMark extends Module {
             if (!aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null) RenderUtils.drawPlatform(aura.getTarget(), (aura.getHitable()) ? ColorUtils.reAlpha(getColor(aura.getTarget()), colorAlphaValue.get()) : new Color(255, 0, 0, colorAlphaValue.get()));
         } else if (modeValue.get().equalsIgnoreCase("tracers")) {
 			if (!aura.getTargetModeValue().get().equalsIgnoreCase("multi") && aura.getTarget() != null) {
-				final Tracers tracers = LiquidBounce.moduleManager.getModule(Tracers.class);
-				if (tracers == null) return;
 			
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		        GL11.glEnable(GL11.GL_BLEND);
