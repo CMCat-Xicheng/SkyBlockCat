@@ -271,7 +271,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         Back("Back", ResourceLocation("liquidbounce+/clickgui/back.png")),
         Mods("Mods", ResourceLocation("liquidbounce+/menu/mods.png")),
         Scripts("Scripts", ResourceLocation("liquidbounce+/clickgui/docs.png")),
-        DiscordRPC("Coming Soon", ResourceLocation("liquidbounce+/menu/discord.png")),
+        DiscordRPC("ComingSoon", ResourceLocation("liquidbounce+/menu/discord.png")),
         Background("Background", ResourceLocation("liquidbounce+/menu/wallpaper.png")),
         Exit("Exit", ResourceLocation("liquidbounce+/menu/exit.png"))
     }
