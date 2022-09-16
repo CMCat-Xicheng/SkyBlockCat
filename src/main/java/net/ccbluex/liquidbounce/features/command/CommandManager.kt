@@ -43,7 +43,6 @@ class CommandManager {
         registerCommand(ScriptManagerCommand())
         registerCommand(PrefixCommand())
         registerCommand(HideCommand())
-        registerCommand(AutoDisableCommand())
         registerCommand(TeleportCommand())
         registerCommand(PathfindingTeleportCommand())
         registerCommand(ThemeCommand())
