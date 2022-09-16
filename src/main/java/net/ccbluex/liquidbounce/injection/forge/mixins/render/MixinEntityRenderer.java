@@ -14,7 +14,6 @@ import net.ccbluex.liquidbounce.features.module.modules.render.Animations;
 import net.ccbluex.liquidbounce.features.module.modules.render.CameraClip;
 import net.ccbluex.liquidbounce.features.module.modules.render.NoHurtCam;
 import net.ccbluex.liquidbounce.features.module.modules.render.TargetMark;
-import net.ccbluex.liquidbounce.features.module.modules.render.Tracers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
