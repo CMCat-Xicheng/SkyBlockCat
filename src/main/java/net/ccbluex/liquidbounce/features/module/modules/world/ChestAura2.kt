@@ -26,7 +26,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.Vec3
 
 @ModuleInfo(name = "ChestAura2", spacedName = "Chest Aura2", description = "Automatically opens chests around you.", category = ModuleCategory.WORLD)
-object ChestAura : Module() {
+object ChestAura2 : Module() {
 
     private val rangeValue = FloatValue("Range", 5F, 1F, 6F, "m")
     private val delayValue = IntegerValue("Delay", 100, 50, 200, "ms")
