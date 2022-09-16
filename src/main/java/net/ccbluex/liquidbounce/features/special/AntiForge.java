@@ -10,7 +10,6 @@ import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.features.module.ModuleManager;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.MinecraftInstance;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
