@@ -40,7 +40,7 @@ class NoSlow : Module() {
    @EventTarget
     fun onUpdate(event: UpdateEvent) {
       if ((mc.thePlayer.isBlocking)) {
-                mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0f, 0f, 0f))
+                PacketUtils.sendPacketNoEvent(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0f, 0f, 0f))
       }
     }
 }
