@@ -217,7 +217,6 @@ class KillAura : Module() {
     private val limitedMultiTargetsValue = IntegerValue("LimitedMultiTargets", 0, 0, 50, { targetModeValue.get().equals("multi", true) })
 
     // idk
-    private val noScaffValue = BoolValue("NoScaffold", true)
     private val debugValue = BoolValue("Debug", false)
 
     // Visuals
@@ -315,9 +314,6 @@ class KillAura : Module() {
             if (autoBlockModeValue.get().equals("AfterTick", true) && canBlock)
                 startBlocking(currentTarget!!, hitable)
         }
-
-        if (rotationStrafeValue.get().equals("Off", true))
-            update()
     }
 
 
@@ -711,7 +707,7 @@ class KillAura : Module() {
         // Extra critical effects
         for (i in 0..2) {
             // Critical Effect
-            if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder && !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && mc.thePlayer.ridingEntity == null || criticals.state && criticals.msTimer.hasTimePassed(criticals.delayValue.get().toLong()) && !mc.thePlayer.isInWater && !mc.thePlayer.isInLava && !mc.thePlayer.isInWeb)
+            if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder && !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && mc.thePlayer.ridingEntity == null && !mc.thePlayer.isInWater && !mc.thePlayer.isInLava && !mc.thePlayer.isInWeb)
                 mc.thePlayer.onCriticalHit(target)
 
             // Enchant Effect
@@ -729,10 +725,6 @@ class KillAura : Module() {
      */
     private fun updateRotations(entity: Entity): Boolean {
         if (rotations.get().equals("none", true)) return true
-
-        val modify = disabler.canModifyRotation
-
-        if (modify) return true // just ignore then
 
         var defRotation = getTargetRotation(entity) ?: return false
 
@@ -866,7 +858,7 @@ class KillAura : Module() {
         }
 
         // Completely disable rotation check if turn speed equals to 0 or NoHitCheck is enabled
-        if(maxTurnSpeed.get() <= 0F || noHitCheck.get() || disabler.canModifyRotation) {
+        if(maxTurnSpeed.get() <= 0F || noHitCheck.get() ) {
             hitable = true
             return
         }
@@ -968,8 +960,7 @@ class KillAura : Module() {
      */
     private val cancelRun: Boolean
         get() = mc.thePlayer.isSpectator || !isAlive(mc.thePlayer)
-                || (blinkCheck.get() && LiquidBounce.moduleManager[Blink::class.java]!!.state) || LiquidBounce.moduleManager[FreeCam::class.java]!!.state || 
-                (noScaffValue.get() && LiquidBounce.moduleManager[Scaffold::class.java]!!.state)
+                || (blinkCheck.get() && LiquidBounce.moduleManager[Blink::class.java]!!.state) || LiquidBounce.moduleManager[FreeCam::class.java]!!.state)
 
     /**
      * Check if [entity] is alive
