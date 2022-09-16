@@ -177,7 +177,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                 double zDiff = event.getZ() - this.lastReportedPosZ;
                 double yawDiff = (double) (yaw - lastReportedYaw);
                 double pitchDiff = (double) (pitch - lastReportedPitch);
-                boolean moved = xDiff * xDiff + yDiff * yDiff + zDiff * zDiff > (LiquidBounce.moduleManager.getModule(AntiDesync.class).getState() ? 0D : 9.0E-4D) || this.positionUpdateTicks >= 20;
+                boolean moved = xDiff * xDiff + yDiff * yDiff + zDiff * zDiff >  9.0E-4D || this.positionUpdateTicks >= 20;
                 boolean rotated = yawDiff != 0.0D || pitchDiff != 0.0D;
 
                 if (this.ridingEntity == null) {
