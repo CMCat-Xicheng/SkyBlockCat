@@ -1,8 +1,4 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
+
 package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
@@ -70,11 +66,10 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         GL11.glPushMatrix()
         renderSwitchButton()
         renderDarkModeButton()
-        Fonts.font40.drawStringWithShadow("LiquidBounce++ b${LiquidBounce.CLIENT_VERSION} | lbplusplus.ga", 2F, height - 12F, -1)
+        Fonts.font40.drawStringWithShadow("SkyBlockCat", 2F, height - 12F, -1)
         Fonts.font40.drawStringWithShadow(creditInfo, width - 3F - Fonts.font40.getStringWidth(creditInfo), height - 12F, -1)
         if (useParallax) moveMouseEffect(mouseX, mouseY, 10F)
         GlStateManager.disableAlpha()
-        RenderUtils.drawImage2(bigLogo, width / 2F - 50F, height / 2F - 90F, 100, 100)
         GlStateManager.enableAlpha()
         renderBar(mouseX, mouseY, partialTicks)
         GL11.glPopMatrix()
@@ -122,7 +117,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
                             LiquidBounce.fileManager.backgroundFile.delete()
                         }
                     } else if (extendedModMode) {;
-                    } else mc.displayGuiScreen(GuiOptions(this, this.mc.gameSettings))
+                        } else mc.displayGuiScreen(GuiOptions(this, this.mc.gameSettings))
                     4 -> if (extendedBackgroundMode) {
                         LiquidBounce.background = null
                         LiquidBounce.fileManager.backgroundFile.delete()
@@ -191,6 +186,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
                 for (icon in ExtendedImageButton.values()) {
                     if (isMouseHover(staticX + 40F * index, staticY, staticX + 40F * (index + 1), staticY + 20F, mouseX, mouseY)) {
                         shouldAnimate = true
+                        displayString = "§7Coming Soon"
                         moveX = staticX + 40F * index
                     }
                     index++
@@ -275,7 +271,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         Back("Back", ResourceLocation("liquidbounce+/clickgui/back.png")),
         Mods("Mods", ResourceLocation("liquidbounce+/menu/mods.png")),
         Scripts("Scripts", ResourceLocation("liquidbounce+/clickgui/docs.png")),
-        DiscordRPC("Discord RPC", ResourceLocation("liquidbounce+/menu/discord.png")),
+        DiscordRPC("Coming Soon", ResourceLocation("liquidbounce+/menu/discord.png")),
         Background("Background", ResourceLocation("liquidbounce+/menu/wallpaper.png")),
         Exit("Exit", ResourceLocation("liquidbounce+/menu/exit.png"))
     }
