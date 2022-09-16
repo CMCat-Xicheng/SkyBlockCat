@@ -25,7 +25,7 @@ import net.minecraft.util.BlockPos
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.Vec3
 
-@ModuleInfo(name = "LeverAura", spacedName = "Chest Aura2", description = "Automatically push levers around you.", category = ModuleCategory.WORLD)
+@ModuleInfo(name = "LeverAura", spacedName = "Lever Aura", description = "Automatically push levers around you.", category = ModuleCategory.WORLD)
 object ChestAura2 : Module() {
 
     private val rangeValue = FloatValue("Range", 5F, 1F, 6F, "m")
