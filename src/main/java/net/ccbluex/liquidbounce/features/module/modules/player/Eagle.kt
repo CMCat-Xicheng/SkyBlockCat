@@ -14,7 +14,7 @@ import net.minecraft.client.settings.GameSettings
 import net.minecraft.init.Blocks
 import net.minecraft.util.BlockPos
 
-@ModuleInfo(name = "Eagle", description = "Makes you eagle (aka. FastBridge).", category = ModuleCategory.PLAYER)
+@ModuleInfo(name = "LegitScaffold", description = "Snake when standing on the edge of the block.", category = ModuleCategory.PLAYER)
 class Eagle : Module() {
 
     @EventTarget
