@@ -15,7 +15,6 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
-import net.ccbluex.liquidbounce.features.module.modules.misc.AutoDisable.DisableEvent;
 
 import java.io.*;
 import java.util.Iterator;
@@ -57,23 +56,6 @@ public class ModulesConfig extends FileConfig {
 
                 if(jsonModule.has("Array"))
                     module.setArray(jsonModule.get("Array").getAsBoolean());
-
-                if (jsonModule.has("AutoDisable")) {
-                    module.getAutoDisables().clear();
-                    try {
-                        JsonArray jsonAD = jsonModule.getAsJsonArray("AutoDisable");
-                        if (jsonAD.size() > 0) for (int i = 0; i <= jsonAD.size() - 1; i++) {
-                            try {
-                                DisableEvent disableEvent = DisableEvent.valueOf(jsonAD.get(i).getAsString());
-                                module.getAutoDisables().add(disableEvent);   
-                            } catch (Exception e) {
-                                // nothing
-                            }
-                        }
-                    } catch (Exception e) {
-                        //nothing.
-                    }
-                }
             }
         }
     }
@@ -96,7 +78,6 @@ public class ModulesConfig extends FileConfig {
             for (DisableEvent e : module.getAutoDisables()) {
                 jsonAD.add(new JsonPrimitive(e.toString()));
             }
-            jsonMod.add("AutoDisable", jsonAD);
             jsonObject.add(module.getName(), jsonMod);
         }
 
