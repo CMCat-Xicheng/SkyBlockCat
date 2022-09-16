@@ -53,8 +53,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
     private <T extends EntityLivingBase> void injectChamsPost(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
         final Chams chams = LiquidBounce.moduleManager.getModule(Chams.class);
         
-        if (chams.getState() && chams.getTargetsValue().get() && chams.getLegacyMode().get() && ((chams.getLocalPlayerValue().get() && entity == Minecraft.getMinecraft().thePlayer) || EntityUtils.isSelected(entity, false))
-            && !(noRender.getState() && noRender.shouldStopRender(entity))) {
+        if (chams.getState() && chams.getTargetsValue().get() && chams.getLegacyMode().get() && ((chams.getLocalPlayerValue().get() && entity == Minecraft.getMinecraft().thePlayer) || EntityUtils.isSelected(entity, false))) {
             GL11.glPolygonOffset(1.0F, 1000000F);
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }
