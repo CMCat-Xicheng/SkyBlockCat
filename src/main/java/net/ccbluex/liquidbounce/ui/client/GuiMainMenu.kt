@@ -121,28 +121,8 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
                             MiscUtils.showErrorPopup("Error", "Exception class: " + e.javaClass.name + "\nMessage: " + e.message)
                             LiquidBounce.fileManager.backgroundFile.delete()
                         }
-                    } else if (extendedModMode) {
-                            val rpc = LiquidBounce.clientRichPresence
-                            rpc.showRichPresenceValue = when (val state = !rpc.showRichPresenceValue) {
-                                false -> {
-                                    rpc.shutdown()
-                                    false
-                                }
-                                true -> {
-                                    var value = true
-                                    thread {
-                                        value = try {
-                                            rpc.setup()
-                                            true
-                                        } catch (throwable: Throwable) {
-                                            ClientUtils.getLogger().error("Failed to setup Discord RPC.", throwable)
-                                            false
-                                        }
-                                    }
-                                    value
-                                }
-                            }
-                        } else mc.displayGuiScreen(GuiOptions(this, this.mc.gameSettings))
+                    } else if (extendedModMode) {;
+                    } else mc.displayGuiScreen(GuiOptions(this, this.mc.gameSettings))
                     4 -> if (extendedBackgroundMode) {
                         LiquidBounce.background = null
                         LiquidBounce.fileManager.backgroundFile.delete()
@@ -211,7 +191,6 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
                 for (icon in ExtendedImageButton.values()) {
                     if (isMouseHover(staticX + 40F * index, staticY, staticX + 40F * (index + 1), staticY + 20F, mouseX, mouseY)) {
                         shouldAnimate = true
-                        displayString = if (icon == ExtendedImageButton.DiscordRPC) "${icon.buttonName}: ${if (LiquidBounce.clientRichPresence.showRichPresenceValue) "§aON" else "§cOFF"}" else icon.buttonName
                         moveX = staticX + 40F * index
                     }
                     index++
