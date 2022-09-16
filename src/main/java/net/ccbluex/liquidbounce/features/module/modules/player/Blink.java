@@ -13,7 +13,6 @@ import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.features.module.modules.render.Breadcrumbs;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
@@ -111,8 +110,7 @@ public class Blink extends Module {
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
-        final Breadcrumbs breadcrumbs = LiquidBounce.moduleManager.getModule(Breadcrumbs.class);
-        final Color color = breadcrumbs.colorRainbow.get() ? ColorUtils.rainbow() : new Color(breadcrumbs.colorRedValue.get(), breadcrumbs.colorGreenValue.get(), breadcrumbs.colorBlueValue.get());
+        final Color color = ColorUtils.rainbow()
 
         synchronized(positions) {
             glPushMatrix();
