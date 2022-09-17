@@ -45,9 +45,10 @@ class NoSlow : Module() {
     @EventTarget
     fun onInteract( event : PlayerInteractEvent) {
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
-            if(mc.thePlayer.getHeldItem() == ItemSword) {
+            if(mc.thePlayer.getHeldItem() != null) {
+               System.out.println(mc.thePlayer.getHeldItem().id)
                event.setCanceled(true);
-               PacketUtils.sendPacket(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.getHeldItem(), 0f, 0f, 0f));
+               mc.getNetHandler().addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.getHeldItem(), 0f, 0f, 0f));
             }
         }
     }
