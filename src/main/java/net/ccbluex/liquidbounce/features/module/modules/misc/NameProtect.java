@@ -26,11 +26,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 
-@ModuleInfo(name = "NameProtect", spacedName = "Name Protect", description = "Changes player names client-side.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "NameProtect", spacedName = "NameProtect", description = "Changes player names client-side.", category = ModuleCategory.RENDER)
 public class NameProtect extends Module {
 
-    private final TextValue fakeNameValue = new TextValue("FakeName", "&cMe");
-    private final TextValue allFakeNameValue = new TextValue("AllPlayersFakeName", "Censored");
+    private final TextValue fakeNameValue = new TextValue("FakeName", "&9ECat");
+    private final TextValue allFakeNameValue = new TextValue("AllPlayersFakeName", "&7Missing-No");
     public final BoolValue selfValue = new BoolValue("Yourself", true);
     public final BoolValue tagValue = new BoolValue("Tag", false);
     public final BoolValue allPlayersValue = new BoolValue("AllPlayers", false);
