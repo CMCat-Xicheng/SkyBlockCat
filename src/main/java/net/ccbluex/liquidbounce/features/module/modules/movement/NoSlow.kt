@@ -2,6 +2,7 @@ package net.ccbluex.liquidbounce.features.module.modules.movement
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
+import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.event.EventState
 import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.event.SlowDownEvent
@@ -40,24 +41,17 @@ import java.util.Arrays;
 
 @ModuleInfo(name = "NoSlow", spacedName = "NoSlow", category = ModuleCategory.MOVEMENT, description = "Prevent you from getting slowed down by using abilities")
 class NoSlow : Module() {
-
-    private static boolean isRightClickKeyDown = false;
-
-    @SubscribeEvent
+    
+    @EventTarget
     public void onTick(TickEndEvent event) {
         isRightClickKeyDown = mc.gameSettings.keyBindUseItem.isKeyDown();
     }
-
-    @SubscribeEvent
     public void onInteract(PlayerInteractEvent event) {
-        if(this -> state && event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
+        if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
             if(mc.thePlayer.getHeldItem() != null) {
-                val item = mc.thePlayer.itemInUse.item;
-                if(item is ItemSword) {
-                    event.setCanceled(true);
-                    if(!isRightClickKeyDown) {
-                        PacketUtils.sendPacketNoEvent(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, Shady.mc.thePlayer.getHeldItem(), 0, 0, 0));
-                    }
+               event.setCanceled(true);
+                if(!isRightClickKeyDown) {
+                    PacketUtils.sendPacketNoEvent(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, Shady.mc.thePlayer.getHeldItem(), 0, 0, 0));
                 }
             }
         }
