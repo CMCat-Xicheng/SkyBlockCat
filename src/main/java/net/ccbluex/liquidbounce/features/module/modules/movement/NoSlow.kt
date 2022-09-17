@@ -43,7 +43,7 @@ import java.util.Arrays;
 class NoSlow : Module() {
     
     @EventTarget
-    public void onInteract(PlayerInteractEvent event) {
+    fun onInteract(PlayerInteractEvent event) {
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
             if(mc.thePlayer.getHeldItem() != null) {
                event.setCanceled(true);
