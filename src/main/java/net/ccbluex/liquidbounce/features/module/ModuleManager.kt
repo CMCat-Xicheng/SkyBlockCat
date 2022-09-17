@@ -46,6 +46,7 @@ class ModuleManager : Listenable {
                 Aimbot::class.java,
                 KillAura::class.java,
                 Velocity::class.java,
+                NoSlow::class.java,
                 Fly::class.java,
                 ClickGUI::class.java,
                 InvMove::class.java,
