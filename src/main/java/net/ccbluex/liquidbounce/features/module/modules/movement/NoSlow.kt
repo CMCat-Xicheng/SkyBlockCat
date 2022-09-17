@@ -43,16 +43,11 @@ import java.util.Arrays;
 class NoSlow : Module() {
     
     @EventTarget
-    public void onTick(TickEndEvent event) {
-        isRightClickKeyDown = mc.gameSettings.keyBindUseItem.isKeyDown();
-    }
     public void onInteract(PlayerInteractEvent event) {
         if(event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
             if(mc.thePlayer.getHeldItem() != null) {
                event.setCanceled(true);
-                if(!isRightClickKeyDown) {
-                    PacketUtils.sendPacketNoEvent(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, Shady.mc.thePlayer.getHeldItem(), 0, 0, 0));
-                }
+               PacketUtils.sendPacketNoEvent(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, Shady.mc.thePlayer.getHeldItem(), 0, 0, 0));
             }
         }
     }
