@@ -1,13 +1,10 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
+
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.AttackEvent;
 import net.ccbluex.liquidbounce.event.ClickWindowEvent;
+import net.ccbluex.liquidbounce.features.module.modules.exploit.AbortBreaking;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +21,12 @@ public class MixinPlayerControllerMP {
     @Inject(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerControllerMP;syncCurrentPlayItem()V"))
     private void attackEntity(EntityPlayer entityPlayer, Entity targetEntity, CallbackInfo callbackInfo) {
         LiquidBounce.eventManager.callEvent(new AttackEvent(targetEntity));
+    }
+
+    @Inject(method = "getIsHittingBlock", at = @At("HEAD"), cancellable = true)
+    private void getIsHittingBlock(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        if (0)
+            callbackInfoReturnable.setReturnValue(false);
     }
 
     @Inject(method = "windowClick", at = @At("HEAD"), cancellable = true)
