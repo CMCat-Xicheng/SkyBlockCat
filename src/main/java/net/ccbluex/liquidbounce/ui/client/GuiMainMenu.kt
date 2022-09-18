@@ -44,7 +44,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
     var extendedBackgroundMode = false
 
     companion object {
-        var useParallax = true
+        var useParallax = false
     }
 
     override fun initGui() {
