@@ -21,18 +21,18 @@ import org.lwjgl.input.Keyboard;
 class GhostBlock : Module() {
 
     fun GhostBlock() {
-        keyBindings.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
+        keyBinding.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
     }
 
     @SubscribeEvent
     fun onRenderWorld(event : RenderWorldLastEvent) {
-        if(keyBindings.get("Create Ghost Block").isKeyDown()) {
-            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
+        if(keyBinding.get("Create Ghost Block").isKeyDown()) {
+            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1f);
             if(obj != null) {
                 if(obj.getBlockPos() != null) {
                     val lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
-                    if((lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) && lookingAtblock != Blocks.air) {
-                        mc.theWorld.setBlockToAir(t.getBlockPos());
+                    if( (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull) && lookingAtblock != Blocks.air) {
+                        mc.theWorld.setBlockToAir(obj.getBlockPos());
                     }
                 }
             }
@@ -42,7 +42,7 @@ class GhostBlock : Module() {
     @EventTarget
     fun onRightClick(event : Event) {
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
-        if( mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) {
+        if( mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&  (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull)) {
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
                 mc.theWorld.setBlockToAir(mc.objectMouseOver.getBlockPos());
                 event.setCanceled(true);
