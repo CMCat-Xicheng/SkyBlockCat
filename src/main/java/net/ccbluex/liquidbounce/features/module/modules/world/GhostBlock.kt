@@ -25,12 +25,12 @@ class GhostBlock : Module() {
     @SubscribeEvent
     fun onRenderWorld(event : RenderWorldLastEvent) {
         if(keyBindings.get("Create Ghost Block").isKeyDown()) {
-            MovingObjectPosition object = mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
+            MovingObjectPosition t= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
             if(object != null) {
                 if(object.getBlockPos() != null) {
-                    Block lookingAtblock = mc.theWorld.getBlockState(object.getBlockPos()).getBlock();
+                    Block lookingAtblock = mc.theWorld.getBlockState(t.getBlockPos()).getBlock();
                     if((lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) && lookingAtblock != Blocks.air) {
-                        mc.theWorld.setBlockToAir(object.getBlockPos());
+                        mc.theWorld.setBlockToAir(t.getBlockPos());
                     }
                 }
             }
@@ -39,7 +39,7 @@ class GhostBlock : Module() {
 
     @EventTarget
     public onRightClick(event : Event) {
-        Block lookingAtblock = mc.theWorld.getBlockState(Shady.mc.objectMouseOver.getBlockPos()).getBlock());
+        Block lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
         if( mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) {
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
                 mc.theWorld.setBlockToAir(mc.objectMouseOver.getBlockPos());
