@@ -47,7 +47,7 @@ class ModuleManager : Listenable {
                 KillAura::class.java,
                 Velocity::class.java,
                 NoSlow::class.java,
-                GhostBlock::class.java
+                GhostBlock::class.java,
                 Fly::class.java,
                 ClickGUI::class.java,
                 InvMove::class.java,
