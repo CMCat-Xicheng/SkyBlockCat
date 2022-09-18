@@ -21,13 +21,13 @@ import org.lwjgl.input.Keyboard;
 class GhostBlock : Module() {
 
     fun GhostBlock() {
-        keyBinding.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
+        keyBindings.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
     }
 
     @SubscribeEvent
     fun onRenderWorld(event : RenderWorldLastEvent) {
-        if(keyBinding.get("Create Ghost Block").isKeyDown()) {
-            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1f);
+        if(keyBindings.get("Create Ghost Block").isKeyDown()) {
+            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1.0);
             if(obj != null) {
                 if(obj.getBlockPos() != null) {
                     val lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
