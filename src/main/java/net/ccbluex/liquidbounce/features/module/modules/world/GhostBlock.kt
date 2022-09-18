@@ -19,26 +19,6 @@ import org.lwjgl.input.Keyboard;
 
 @ModuleInfo(name = "GhostBlock", description = "Turn blocks to air client-side by right click pickaxe.", category = ModuleCategory.WORLD)
 class GhostBlock : Module() {
-
-    fun GhostBlock() {
-        net.minecraft.client.settings.keyBinding.KeyBinding.put("Create Ghost Block",net.minecraft.client.settings.KeyBinding.KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
-    }
-
-    @SubscribeEvent
-    fun onRenderWorld(event : RenderWorldLastEvent) {
-        if(keyBindings.get("Create Ghost Block").isKeyDown()) {
-            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1.0);
-            if(obj != null) {
-                if(obj.getBlockPos() != null) {
-                    val lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
-                    if( (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull) && lookingAtblock != Blocks.air) {
-                        mc.theWorld.setBlockToAir(obj.getBlockPos());
-                    }
-                }
-            }
-        }
-    }
-
     @EventTarget
     fun onRightClick(event : Event) {
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
