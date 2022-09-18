@@ -22,6 +22,7 @@ import org.lwjgl.input.Keyboard;
 class GhostBlock : Module() {
     @SubscribeEvent
     fun onRightClick(event : Event) {
+        ClientUtils.getLogger().info("right click detected.");
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
         if( mc.objectMouseOver != null && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull)) {
             ClientUtils.getLogger().info("vaild right click detected.");
