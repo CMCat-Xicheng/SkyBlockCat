@@ -21,15 +21,11 @@ import org.lwjgl.input.Keyboard;
 @ModuleInfo(name = "GhostBlock", description = "Turn blocks to air client-side by right click pickaxe.", category = ModuleCategory.WORLD)
 class GhostBlock : Module() {
     @SubscribeEvent
-    fun onRightClick(event : Event) {
-        ClientUtils.getLogger().info("right click detected.");
+    fun onInteract(event : PlayerInteractEvent) {
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
-        if( mc.objectMouseOver != null && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull)) {
-            ClientUtils.getLogger().info("vaild right click detected.");
+        if( mc.objectMouseOver != null && event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull) ) {
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
-                ClientUtils.getLogger().info("Attempt to create.");
                 mc.theWorld.setBlockToAir(mc.objectMouseOver.getBlockPos());
-                event.setCanceled(true);
             }
         }
     }
