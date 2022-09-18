@@ -23,7 +23,7 @@ class GhostBlock : Module() {
     }
 
     @SubscribeEvent
-    fun void onRenderWorld(RenderWorldLastEvent event) {
+    fun onRenderWorld(RenderWorldLastEvent event) {
         if(KeybindUtils.get("Create Ghost Block").isKeyDown()) {
             MovingObjectPosition object = mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
             if(object != null) {
