@@ -25,10 +25,10 @@ class GhostBlock : Module() {
     @SubscribeEvent
     fun onRenderWorld(event : RenderWorldLastEvent) {
         if(keyBindings.get("Create Ghost Block").isKeyDown()) {
-            MovingObjectPosition obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
+            val obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
             if(obj != null) {
                 if(obj.getBlockPos() != null) {
-                    Block lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
+                    val lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
                     if((lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) && lookingAtblock != Blocks.air) {
                         mc.theWorld.setBlockToAir(t.getBlockPos());
                     }
@@ -39,7 +39,7 @@ class GhostBlock : Module() {
 
     @EventTarget
     public onRightClick(event : Event) {
-        Block lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
+        val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
         if( mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) {
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
                 mc.theWorld.setBlockToAir(mc.objectMouseOver.getBlockPos());
