@@ -23,9 +23,9 @@ class GhostBlock : Module() {
     fun onRightClick(event : Event) {
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
         if( mc.objectMouseOver != null && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.skull)) {
-        System.out.println("Right Click Detected.");
+            ClientUtils.getLogger().info("vaild right click detected.");
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
-                System.out.println("Try to ghost.");
+                ClientUtils.getLogger().info("Attempt to create.");
                 mc.theWorld.setBlockToAir(mc.objectMouseOver.getBlockPos());
                 event.setCanceled(true);
             }
