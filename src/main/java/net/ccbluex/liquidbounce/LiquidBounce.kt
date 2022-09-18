@@ -32,7 +32,7 @@ object LiquidBounce {
 
     // Client information
     const val CLIENT_NAME = "SkyBlockCat"
-    const val CLIENT_VERSION = "1220917"
+    const val CLIENT_VERSION = "1220918"
     const val CLIENT_CREATOR = "CMCat"
     const val CLIENT_CLOUD = "https://ccat.tech/sbc"
 
