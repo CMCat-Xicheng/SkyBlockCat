@@ -19,16 +19,16 @@ import org.lwjgl.input.Keyboard;
 class GhostBlock : Module() {
 
     fun GhostBlock() {
-        KeybindUtils.register("Create Ghost Block", Keyboard.KEY_G);
+        keyBindings.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
     }
 
     @SubscribeEvent
     fun onRenderWorld(event : RenderWorldLastEvent) {
         if(keyBindings.get("Create Ghost Block").isKeyDown()) {
-            MovingObjectPosition t= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
-            if(object != null) {
-                if(object.getBlockPos() != null) {
-                    Block lookingAtblock = mc.theWorld.getBlockState(t.getBlockPos()).getBlock();
+            MovingObjectPosition obj= mc.thePlayer.rayTrace(mc.playerController.getBlockReachDistance(), 1);
+            if(obj != null) {
+                if(obj.getBlockPos() != null) {
+                    Block lookingAtblock = mc.theWorld.getBlockState(obj.getBlockPos()).getBlock();
                     if((lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) && lookingAtblock != Blocks.air) {
                         mc.theWorld.setBlockToAir(t.getBlockPos());
                     }
