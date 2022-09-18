@@ -21,7 +21,7 @@ import org.lwjgl.input.Keyboard;
 class GhostBlock : Module() {
 
     fun GhostBlock() {
-        keyBindings.put("Create Ghost Block",KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
+        net.minecraft.client.settings.keyBinding.KeyBinding.put("Create Ghost Block",net.minecraft.client.settings.KeyBinding.KeyBinding("Create Ghost Block", Keyboard.KEY_G, "SkyBlockCat"));
     }
 
     @SubscribeEvent
