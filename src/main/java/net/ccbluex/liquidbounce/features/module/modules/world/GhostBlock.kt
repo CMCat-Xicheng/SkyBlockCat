@@ -38,7 +38,7 @@ class GhostBlock : Module() {
     }
 
     @EventTarget
-    public onRightClick(event : Event) {
+    fun onRightClick(event : Event) {
         val lookingAtblock = mc.theWorld.getBlockState(mc.objectMouseOver.getBlockPos()).getBlock();
         if( mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.chest) && (lookingAtblock != Blocks.lever) && (lookingAtblock != Blocks.trapped_chest) && (lookingAtblock != Blocks.wooden_button) && (lookingAtblock != Blocks.stone_button) && (lookingAtblock != Blocks.Blocks.skull) {
             if(mc.thePlayer.getHeldItem().item is ItemPickaxe) {
