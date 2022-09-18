@@ -86,34 +86,5 @@ public class ClickGuiConfig extends FileConfig {
      */
     @Override
     protected void saveConfig() throws IOException {
-        final JsonObject jsonObject = new JsonObject();
-
-        for (final Panel panel : LiquidBounce.clickGui.panels) {
-            final JsonObject panelObject = new JsonObject();
-
-            panelObject.addProperty("open", panel.getOpen());
-            panelObject.addProperty("visible", panel.isVisible());
-            panelObject.addProperty("posX", panel.getX());
-            panelObject.addProperty("posY", panel.getY());
-
-            for(final Element element : panel.getElements()) {
-                if(!(element instanceof ModuleElement))
-                    continue;
-
-                final ModuleElement moduleElement = (ModuleElement) element;
-
-                final JsonObject elementObject = new JsonObject();
-
-                elementObject.addProperty("Settings", moduleElement.isShowSettings());
-
-                panelObject.add(moduleElement.getModule().getName(), elementObject);
-            }
-
-            jsonObject.add(panel.getName(), panelObject);
-        }
-
-        final PrintWriter printWriter = new PrintWriter(new FileWriter(getFile()));
-        printWriter.println(FileManager.PRETTY_GSON.toJson(jsonObject));
-        printWriter.close();
     }
 }
