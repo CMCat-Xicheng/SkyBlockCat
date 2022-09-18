@@ -429,7 +429,6 @@ public class ClickGui extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.clickGuiConfig);
     }
 
     @Override
