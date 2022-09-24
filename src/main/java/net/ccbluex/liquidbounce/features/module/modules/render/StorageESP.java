@@ -53,10 +53,10 @@ public class StorageESP extends Module {
             for (final TileEntity tileEntity : mc.theWorld.loadedTileEntityList) {
                 Color color = null;
 
-                if (chestValue.get() && tileEntity instanceof TileEntityChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()) && !ChestAura2.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (chestValue.get() && tileEntity instanceof TileEntityChest)
                     color = new Color(0, 66, 255);
 
-                if (leverValue.get() && tileEntity instanceof TileEntityLever && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()) && !ChestAura2.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (leverValue.get() && tileEntity instanceof TileEntityLever)
                     color = Color.MAGENTA;
 
                 if (color == null)
