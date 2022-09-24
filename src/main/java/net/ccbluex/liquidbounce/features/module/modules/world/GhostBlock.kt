@@ -19,7 +19,7 @@ import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import org.lwjgl.input.Keyboard;
 
-@ModuleInfo(name = "GhostBlock", description = "Turn blocks to air client-side by right click pickaxe.", category = ModuleCategory.WORLD)
+@ModuleInfo(name = "HoldGhostBlock", description = "Turn blocks to air client-side by right click pickaxe.", category = ModuleCategory.DEVING)
 class GhostBlock : Module() {
     @SubscribeEvent
     fun onInteract(event : PlayerInteractEvent) {
