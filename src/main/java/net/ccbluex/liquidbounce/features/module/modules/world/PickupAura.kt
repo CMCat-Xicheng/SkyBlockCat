@@ -11,6 +11,6 @@ import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.UpdateEvent
 
 @ModuleInfo(name = "PickupAura", description = "Allows you to pickup items around you, even through walls.", category = ModuleCategory.DEVING)
-class GhostBlock : Module() {
+class PickupAura : Module() {
   
 }
