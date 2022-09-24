@@ -30,15 +30,12 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-@ModuleInfo(name = "StorageESP", spacedName = "Storage ESP", description = "Allows you to see chests, dispensers, etc. through walls.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "SecretESP", spacedName = "SecretESP", description = "Allows you to see chests, levers, etc. through walls.", category = ModuleCategory.RENDER)
 public class StorageESP extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"Box", "OtherBox", "Outline", "ShaderOutline", "ShaderGlow", "2D", "WireFrame"}, "Outline");
 
     private final BoolValue chestValue = new BoolValue("Chest", true);
-    private final BoolValue enderChestValue = new BoolValue("EnderChest", true);
-    private final BoolValue furnaceValue = new BoolValue("Furnace", true);
-    private final BoolValue dispenserValue = new BoolValue("Dispenser", true);
-    private final BoolValue hopperValue = new BoolValue("Hopper", true);
+    private final BoolValue leverValue = new BoolValue("Lever", true);
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
@@ -56,25 +53,16 @@ public class StorageESP extends Module {
             for (final TileEntity tileEntity : mc.theWorld.loadedTileEntityList) {
                 Color color = null;
 
-                if (chestValue.get() && tileEntity instanceof TileEntityChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (chestValue.get() && tileEntity instanceof TileEntityChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()) && !ChestAura2.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
                     color = new Color(0, 66, 255);
 
-                if (enderChestValue.get() && tileEntity instanceof TileEntityEnderChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (leverValue.get() && tileEntity instanceof TileEntityLever && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()) && !ChestAura2.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
                     color = Color.MAGENTA;
-
-                if (furnaceValue.get() && tileEntity instanceof TileEntityFurnace)
-                    color = Color.BLACK;
-
-                if (dispenserValue.get() && tileEntity instanceof TileEntityDispenser)
-                    color = Color.BLACK;
-
-                if (hopperValue.get() && tileEntity instanceof TileEntityHopper)
-                    color = Color.GRAY;
 
                 if (color == null)
                     continue;
 
-                if (!(tileEntity instanceof TileEntityChest || tileEntity instanceof TileEntityEnderChest)) {
+                if (!(tileEntity instanceof TileEntityChest || tileEntity instanceof TileEntityLever)) {
                     RenderUtils.drawBlockBox(tileEntity.getPos(), color, !mode.equalsIgnoreCase("otherbox"));
                     continue;
                 }
