@@ -8,5 +8,5 @@ enum class ModuleCategory(val displayName: String) {
     MOVEMENT("Movement"),
     RENDER("Render"),
     WORLD("World"),
-
+    DEVING("Deving"),
 }
