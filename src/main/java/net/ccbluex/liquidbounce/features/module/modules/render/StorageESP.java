@@ -30,12 +30,12 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-@ModuleInfo(name = "SecretESP", spacedName = "SecretESP", description = "Allows you to see chests, levers, etc. through walls.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "SecretESP", spacedName = "SecretESP", description = "Allows you to see chests, levers, etc. through walls.", category = ModuleCategory.DEVING)
 public class StorageESP extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"Box", "OtherBox", "Outline", "ShaderOutline", "ShaderGlow", "2D", "WireFrame"}, "Outline");
 
     private final BoolValue chestValue = new BoolValue("Chest", true);
-    private final BoolValue leverValue = new BoolValue("Lever", true);
+    //private final BoolValue leverValue = new BoolValue("Lever", true);
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
@@ -56,13 +56,13 @@ public class StorageESP extends Module {
                 if (chestValue.get() && tileEntity instanceof TileEntityChest)
                     color = new Color(0, 66, 255);
 
-                if (leverValue.get() && tileEntity instanceof TileEntityLever)
-                    color = Color.MAGENTA;
+                //if (leverValue.get() && tileEntity instanceof TileEntityLever)
+                //    color = Color.MAGENTA;
 
                 if (color == null)
                     continue;
 
-                if (!(tileEntity instanceof TileEntityChest || tileEntity instanceof TileEntityLever)) {
+                if (!(tileEntity instanceof TileEntityChest /*|| tileEntity instanceof TileEntityLever*/)) {
                     RenderUtils.drawBlockBox(tileEntity.getPos(), color, !mode.equalsIgnoreCase("otherbox"));
                     continue;
                 }
